@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faPersonDigging } from "@fortawesome/free-solid-svg-icons";
 import { twMerge } from "tailwind-merge";
+import { isOverdue } from "./getOverdueTodos";
 
 type Props = {
   todo: Todo;
@@ -41,9 +42,13 @@ const TodoItem = (props: Props) => {
             icon={faPersonDigging}
             className="mr-2 shrink-0 text-slate-500"
           />
-          <span className="min-w-0 text-lg font-medium wrap-anywhere text-slate-700">
-            {todo.name}
-          </span>
+          {todo.isDone || isOverdue(todo.deadline) == false ?
+            <span className="min-w-0 text-lg font-medium wrap-anywhere text-slate-700">
+              {todo.name}
+            </span>
+            : <span className="min-w-0 text-lg font-medium wrap-anywhere text-red-500">
+              {todo.name}
+            </span>}
         </label>
         <span
           aria-label={`優先度: ${todo.priority}`}
@@ -57,11 +62,27 @@ const TodoItem = (props: Props) => {
             {formattedDate(todo.deadline)}
           </span>
         )}
-        {todo.isDone && (
+        {todo.isDone ? (
           <span className="rounded-full bg-slate-800 px-3 py-0.5 text-xs font-medium text-white">
             完了済み
           </span>
+        ) : todo.deadline != null ? (
+          <>
+            <span className="rounded-full bg-slate-800 px-3 py-0.5 text-xs font-medium text-white">
+              未完了
+            </span>
+            {isOverdue(todo.deadline) && (
+              <span className="rounded-full bg-red-600 px-3 py-0.5 text-xs font-medium text-white">
+                期限を経過
+              </span>
+            )}
+          </>
+        ) : (
+          <span className="rounded-full bg-slate-800 px-3 py-0.5 text-xs font-medium text-white">
+            期限なし
+          </span>
         )}
+
       </div>
       <button
         type="button"

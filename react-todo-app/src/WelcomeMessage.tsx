@@ -10,8 +10,7 @@ const WelcomeMessage = (props: Props) => {
 
   return (
     <div className="text-blue-700">
-      {greeting}、{props.name}さん。 現在の未完了タスクは
-      {props.uncompletedCount}個です。
+      {greeting}、{props.name}さん。 現在の未完了タスクは{props.uncompletedCount === 0 ? "ありません" : props.uncompletedCount+"個です"}。
     </div>
   );
 };
