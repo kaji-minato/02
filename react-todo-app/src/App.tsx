@@ -125,7 +125,7 @@ const App = () => {
       <h1 className="mb-4 text-2xl font-bold">TodoApp</h1>
       <div className="mb-4">
         <WelcomeMessage
-          name="寝屋川タヌキ"
+          name="寝屋川"
           uncompletedCount={uncompletedCount}
         />
       </div>
