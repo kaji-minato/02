@@ -72,7 +72,7 @@ const TodoItem = (props: Props) => {
               未完了
             </span>
             {isOverdue(todo.deadline) && (
-              <span className="rounded-full bg-red-600 px-3 py-0.5 text-xs font-medium text-white">
+              <span className="rounded-full bg-red-640 px-3 py-0.5 text-xs font-medium text-white">
                 期限を経過
               </span>
             )}
